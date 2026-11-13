@@ -1,0 +1,63 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{% block title %}Space Prospection{% endblock %}</title>
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+	{# ?v=... forces browsers to download the new CSS after a change. Increase the number whenever you edit a CSS file. #}
+	<link rel="stylesheet" href="{% static 'css/style.css' %}?v=20261114" type="text/css">
+	{% block extra_css %}{% endblock %}
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<div>
+				<a href="{% url 'space_blog:home' %}" class="logo"><img src="{% static 'images/logo.png' %}" alt="Space Prospection - home"></a>
+				{% block nav %}
+				{% with page=request.resolver_match.url_name %}
+				<ul id="navigation">
+					<li{% if page == 'home' %} class="selected"{% endif %}><a href="{% url 'space_blog:home' %}">Home</a></li>
+					<li{% if page == 'about_us' %} class="selected"{% endif %}><a href="{% url 'space_blog:about_us' %}">About</a></li>
+					<li class="menu{% if page == 'projects' or page == 'projectlist' %} selected{% endif %}">
+						<a href="{% url 'space_blog:projects' %}">Projects</a>
+						<ul class="primary">
+							{% for p in nav_projects %}<li><a href="{% url 'space_blog:projectlist' p.id %}">{{ p.project_title }}</a></li>{% endfor %}
+						</ul>
+					</li>
+					<li class="menu{% if page == 'blog' or page == 'post' %} selected{% endif %}">
+						<a href="{% url 'space_blog:blog' %}">Blog</a>
+						<ul class="secondary">
+							{% for b in nav_blogs %}<li><a href="{% url 'space_blog:post' b.id %}">{{ b.blog_title }}</a></li>{% endfor %}
+						</ul>
+					</li>
+					<li{% if page == 'contact' %} class="selected"{% endif %}><a href="{% url 'space_blog:contact' %}">Contact</a></li>
+					<li class="auth">
+						{% if user.is_authenticated %}<a href="{% url 'login_page:logout' %}">Logout</a>
+						{% else %}<a href="{% url 'login_page:login' %}">Login</a>{% endif %}
+					</li>
+				</ul>
+				{% endwith %}
+				{% endblock %}
+			</div>
+		</div>
+		<div id="body" class="{% block body_class %}{% endblock %}">
+			{% block content %}{% endblock %}
+		</div>
+		<div id="footer">
+			<div class="connect">
+				<div>
+					<h1>FOLLOW OUR MISSIONS ON</h1>
+					<div>
+						<a href="https://www.facebook.com/" class="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook">facebook</a>
+						<a href="https://twitter.com/" class="twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter">twitter</a>
+						<a href="https://www.pinterest.com/" class="pinterest" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">pinterest</a>
+					</div>
+				</div>
+			</div>
+			<div class="footnote">
+				<div><p>&copy; {% now "Y" %} BY SPACE PROSPECTION | ALL RIGHTS RESERVED</p></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

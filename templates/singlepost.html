@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blogs.blog_title }} - Space Prospection{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div>
+        <h1>{{ blogs.blog_title }}</h1>
+        <div class="article">
+            <img src="{{ blogs.blog_image.url }}" alt="{{ blogs.blog_title }}">
+            <span>{{ blogs.created_at }}</span>
+            {{ blogs.blog_desc|linebreaks }}
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <h1>RECENT POSTS</h1>
+                    <ul>
+                        {% for blog in blogs2 %}
+                        <li>
+                            <a href="{% url 'space_blog:post' blog.id %}"><img src="{{ blog.blog_image.url }}" loading="lazy" alt="{{ blog.blog_title }}"></a>
+                            <h2>{{ blog.blog_title }}</h2>
+                            <span>{{ blog.created_at }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

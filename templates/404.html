@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Page not found - Space Prospection{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div>
+        <h1>Page not found</h1>
+        <p>Looks like this page drifted out of orbit. The link may be broken or the page may have been removed.</p>
+        <a href="{% url 'space_blog:home' %}" class="more">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

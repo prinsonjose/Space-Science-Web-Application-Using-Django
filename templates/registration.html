@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - Space Prospection{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}?v=20261114" type="text/css">{% endblock %}
+{% block nav %}{% endblock %}
+{% block body_class %}auth-page{% endblock %}
+
+{% block content %}
+<div class="auth-wrap">
+    <div class="auth-card">
+        <h1>JOIN OUR MISSION</h1>
+        <p class="auth-intro">Create your account and become part of our space science community.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+            <p class="auth-message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="{% url 'login_page:register' %}">
+            {% csrf_token %}
+            <div class="auth-row">
+                <div class="auth-field">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name"
+                           placeholder="Enter your first name" autocomplete="given-name" required>
+                </div>
+                <div class="auth-field">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name"
+                           placeholder="Enter your last name" autocomplete="family-name" required>
+                </div>
+            </div>
+
+            <div class="auth-field">
+                <label for="Email">Email</label>
+                <input type="email" id="Email" name="Email"
+                       placeholder="Enter your email" autocomplete="email" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username"
+                       placeholder="Create a username" autocomplete="username" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password"
+                       placeholder="Create a password" autocomplete="new-password" required>
+            </div>
+
+            <div class="auth-field">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password"
+                       placeholder="Enter your password again" autocomplete="new-password" required>
+            </div>
+
+            <button type="submit" class="auth-button">CREATE ACCOUNT</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="{% url 'login_page:login' %}">Login here</a></p>
+    </div>
+</div>
+{% endblock %}

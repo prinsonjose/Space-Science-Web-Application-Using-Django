@@ -1,0 +1,34 @@
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.pyo
+
+# ---------- Virtual environments ----------
+venv/
+.venv/
+env/
+ENV/
+
+# ---------- Django ----------
+*.log
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+
+# Static files created by "python manage.py collectstatic" (STATIC_ROOT = assets/)
+# Our own files live in static/ and are kept.
+assets/
+
+# Uploaded images (MEDIA_ROOT = media/). Remove this line if you want the
+# sample blog / project pictures to be committed with the code.
+media/
+
+# ---------- Secrets ----------
+.env
+*.env
+
+# ---------- Editors / OS ----------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

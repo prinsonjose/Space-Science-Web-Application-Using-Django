@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ projects.project_title }} - Space Prospection{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div class="project-detail">
+        <h1>{{ projects.project_title }}</h1>
+        <img src="{{ projects.project_image.url }}" alt="{{ projects.project_title }}">
+        {{ projects.project_desc|linebreaks }}
+    </div>
+</div>
+{% endblock %}

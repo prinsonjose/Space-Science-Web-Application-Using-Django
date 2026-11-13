@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects - Space Prospection{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div>
+        <h1>Projects</h1>
+        <ul>
+            {% for project in projects %}
+                <li>
+                    <a href="{% url 'space_blog:projectlist' project.id %}"><img src="{{ project.project_image.url }}" loading="lazy" alt="{{ project.project_title }}"></a>
+                    <div>
+                        <h1>{{ project.project_title }}</h1>
+                        <p>{{ project.project_desc }}</p>
+                        <a href="{% url 'space_blog:projectlist' project.id %}" class="more">Read More</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact - Space Prospection{% endblock %}
+
+{% block content %}
+<div class="header">
+    <div class="contact">
+        <h1>Contact</h1>
+        <h2>DO NOT HESITATE TO CONTACT US</h2>
+        {% if messages %}
+            {% for message in messages %}
+            <p class="form-message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form action="{% url 'space_blog:contact' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" name="Name" placeholder="Name" maxlength="25" required>
+            <input type="email" name="Email" placeholder="Email Address" maxlength="25" required>
+            <input type="text" name="Subject" placeholder="Subject" maxlength="100" required>
+            <textarea name="message" cols="50" rows="7" placeholder="Message" required></textarea>
+            <input type="submit" value="Send" id="submit">
+        </form>
+    </div>
+</div>
+{% endblock %}
